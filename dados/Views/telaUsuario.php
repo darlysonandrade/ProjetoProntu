@@ -45,11 +45,11 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                    <input type="password" name="senha_login" placeholder="Insira sua senha" required class="form-control input-lg" />
+                    <input type="password" name="senha_login"  placeholder="Insira sua senha" required class="form-control input-lg" />
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-lg btn-block btn-success">Login</button>
+            <button type="submit" name="botaocad" value="usuarioadm" class="btn btn-lg btn-block btn-success">Login</button>
             <section>
                 Registre-se agora! <a href="cadastrologin.php"><span>&rarr;</span> Clique aqui</a>
             </section>

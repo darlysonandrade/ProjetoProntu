@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="ProntuMedic.php" class="btn btn-default btn-flat">Sair</a>
+                                <a href="telaUsuario.php" class="btn btn-default btn-flat">Sair</a>
                             </div>
 
                         </li>
@@ -175,9 +175,9 @@ Dashboard
                     <!-- form start -->
                     <form class="form-horizontal">
                         <div class="box-body">
-                            <a href="cadmedico.php">
-                                <div class="col-sm-6">
 
+                                <div class="col-sm-6">
+                                    <a href="cadMedico.php">
                                     <div class="info-box bg-red-gradient">
                                        <span class="info-box-icon">
 
@@ -193,12 +193,13 @@ Dashboard
                                         <!-- /.info-box-content -->
                                     </div>
                                     <!-- /.info-box -->
+                                    </a>
                                 </div>
-                            </a>
+
                             <!-- OUTRO CADASRO -->
 
                                 <div class="col-sm-6">
-                                    <a href="cadpaciente.php">
+                                    <a href="cadPaciente.php">
                                     <div class="info-box bg-blue-gradient">
                                        <span class="info-box-icon">
 
@@ -214,11 +215,11 @@ Dashboard
                                     </div>
                             </a>
 
-                            <!-- /.info-box -->
                         </div>
-                            <a href="atendimento.php">
-                            <div class="col-sm-6">
 
+
+                            <div class="col-sm-6">
+                                <a href="agendamento.php">
 
                                 <div class="info-box bg-yellow-gradient">
                                        <span class="info-box-icon">
@@ -234,11 +235,12 @@ Dashboard
                         </div>
                         <!-- /.info-box-content -->
                 </div>
-                <!-- /.info-box -->
+                                </a>
             </div>
-                            </a>
-                            <a href="atendimento.php">
+
+
                             <div class="col-sm-6">
+                                <a href="atendimento.php">
                     <div class="info-box bg-green-gradient">
                                        <span class="info-box-icon">
 
@@ -253,9 +255,11 @@ Dashboard
             </div>
             <!-- /.info-box-content -->
 </div>
-<!-- /.info-box -->
+                                </a>
 </div>
-                            </a>
+
+
+
 
                     </form>
                 </div>

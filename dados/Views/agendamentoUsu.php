@@ -1,4 +1,20 @@
-<?php include "../ConexaoModel/ConexaoCidades.php" ?>
+<?php
+
+include "../Controller/UsuarioController.php";
+
+$con = new UsuarioController();
+
+$con->seleEstados();
+
+$con->seleEspec();
+
+$con->seleMedico();
+
+$con->selePaciente();
+
+
+$con->TabelaMed();
+?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -38,6 +54,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../bootstrap/dist/css/skins/skin-blue.min.css">
 
 
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -53,13 +75,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-</div>
 
 <!-- Main Header -->
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="telaPrincipal.php" class="logo">
+    <a href="telaPrincipalUsu.php" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b></b>ProntuM</span>
         <!-- logo for regular state and mobile devices -->
@@ -102,7 +123,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="ProntuMedic.php" class="btn btn-default btn-flat">Sair</a>
+                                <a href="telaUsuario.php" class="btn btn-default btn-flat">Sair</a>
                             </div>
 
                         </li>
@@ -159,8 +180,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </a>
                 <ul class="treeview-menu">
-                    <li class="Medicos"><a href="cadmedico.php"><i class="fa fa-user-md"></i>Medicos</a></li>
-                    <li class="Pacientes"><a href="cadpaciente.php"><i class="fa  fa-user-plus"></i>Pacientes</a></li>
+                    <li class="Medicos"><a href="cadMedico.php"><i class="fa fa-user-md"></i>Medicos</a></li>
+                    <li class="Pacientes"><a href="cadPaciente.php"><i class="fa  fa-user-plus"></i>Pacientes</a></li>
                 </ul>
             </li>
         </ul>
@@ -177,7 +198,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </h1>
         <ol class="breadcrumb">
 
-            <li><a href="telaPrincipal.php"><i class="fa fa-dashboard"></i>Inicio</a></li>
+            <li><a href="telaPrincipalUsu.php"><i class="fa fa-dashboard"></i>Inicio</a></li>
             <li class="active">Agendamento</li>
         </ol>
     </section>
@@ -189,13 +210,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- right column -->
                 <div class="col-md-10">
                     <!-- Horizontal Form -->
-                    <div class="box box-warning">
+                    <div class="col-md-1 box box-warning">
                         <div class="box-header with-border="">
                         <h3 class="box-title">Agendamento</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="../Controller/ControllerRegistros.php">
                         <div class="box-body">
 
 
@@ -203,72 +224,131 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="form-group">
                                     <label class="col-sm-1 control-label">Horas</label>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </div>
-                                            <input type="text" class="form-control timepicker">
+                                            <input type="text" class="form-control timepicker" name="horagenda" required>
                                         </div>
                                     </div>
-                                    <label class="col-sm-1 control-label">Data</label>
-                                    <div class="col-sm-3">
+                                    <label class="col-sm-2 control-label">Data</label>
+                                    <div class="col-sm-4">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar-check-o"></i>
                                             </div>
-                                            <input type="date" class="form-control  " placeholder="Data">
+                                            <input type="date" class="form-control" name="dateagenda" placeholder="Data" required>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
+<br>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-1 control-label">Medico</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control"  placeholder="Medico">
-                                </div>
-                                <label class="col-sm-1 control-label">Paciente</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" placeholder="Paciente">
-                                </div>
+                                <div class="col-sm-4">
+                                    <select class="form-control select2"  name="selmedico" data-placeholder="Selecione o Medico" style="width: 100%;" required>
+                                        <?php
+                                        while ($row = mysqli_fetch_assoc($con->algo)){
+                                            echo '<option value="'.$row['nome_completo'].'">'.$row['nome_completo'].'</option>';
+                                        }
+                                        ?>
+                                    </select>
                             </div>
 
 
+                                <label class="col-sm-2 control-label">Paciente</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control select2"  name="selpaciente" data-placeholder="Selecione o Paciente" style="width: 100%;" required>
+                                        <?php
+                                        while ($row = mysqli_fetch_assoc($con->algodois)){
+                                            echo '<option value="'.$row['nome_completo'].'">'.$row['nome_completo'].'</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                            </div>
 
 
 
                             <!-- /.box-body -->
                         </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-warning">Cancelar</button>
-                                <button type="submit" class="btn pull-right btn-warning">Cadastrar Medico</button>
+
+
+                        <div class="box-footer">
+                            <div class="row">
+                            <div class="col-md-5">
+                            <button type="submit" class="btn btn-warning">Cancelar</button>
                             </div>
+                            <div class="col-md-6">
+                            <button type="button" class="btn pull-right btn-warning" data-toggle="modal" data-target="#myModalcad">Agendar</button>
+                            </div>
+                            </div>
+
+
+                            <div class="modal fade" id="myModalcad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+
+                                            <button type="button"  class="close" name="botaocad" value="atendimento" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" >&times;</span>
+                                            </button>
+                                            <h4 class="modal-title text-center" id="myModalLabel">Confirmação de Agendamento</h4>
+                                            <br>
+                                            <center><button type="submit"  name="botaocad" value="agendamento" class="btn btn-warning ">Confirmar</button></center>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
                             <!-- /.box-footer -->
+
+
+
+
+
+
                     </form>
 
 
-            </div>
-            <!-- /.box -->
-</div>
-<!--/.col (right) -->
 
-</div>
-</div>
+
+
+
+   </div>
+    </div>
+    </div>
+    </div>
+
+
+
 
 <footer class="main-footer">
 
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+
 </footer>
+
 </div>
+
 
 
 
 <!-- /.control-sidebar -->
 <!-- Add the sidebar's background. This div must be placed
 immediately after the control sidebar -->
-<div class="control-sidebar-bg"></div>
+<div class="control-sidebar-bg">
+
 </div>
+
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
